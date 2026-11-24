@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Import — My Archive</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">My Archive</div>
+    <div class="top-actions">
+      <a class="btn btn-ghost" href="/">Back to feed</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <a class="back-link" href="/">← Back to the feed</a>
+    <h1>Import your Instagram saves</h1>
+    <p>
+      There is no official API that gives a third-party app your saved posts —
+      Meta simply doesn't expose them. So My Archive syncs the honest way:
+      you export your own data from Instagram and import it here. The file
+      never leaves this machine.
+    </p>
+    <ol>
+      <li>
+        In Instagram, go to <strong>Settings → Accounts Centre → Your
+        information and permissions → Download your information</strong>.
+      </li>
+      <li>Choose <strong>JSON</strong> format (not HTML) and request the download.</li>
+      <li>
+        When it arrives, find <code>saved_posts.json</code> inside the download
+        and drop it below.
+      </li>
+    </ol>
+    <p>
+      Every post is imported with its link, author, caption and save date,
+      then sorted into a genre automatically. Posts already in your archive
+      are skipped as duplicates — importing the same export twice is safe.
+    </p>
+
+    <div id="drop" class="drop">
+      <p><strong>Drop your saved_posts.json here</strong></p>
+      <p>or</p>
+      <input type="file" id="fileInput" accept=".json,application/json" />
+    </div>
+
+    <p>
+      Just want to see how it works?
+      <button id="demoBtn" class="btn btn-ghost">Import the fictional sample export</button>
+    </p>
+
+    <div id="result" class="result hidden"></div>
+  </main>
+
+  <script src="/import.js"></script>
+</body>
+</html>

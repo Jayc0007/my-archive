@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>My Archive — everything you've saved, in one feed</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">My Archive</div>
+    <div class="top-actions">
+      <!-- Smart Feed toggle pill. ON by default. Shows what the feed is
+           currently tuned to, e.g. "Smart feed · tuned to Tech + robot". -->
+      <button id="smartPill" class="pill pill-on" title="Toggle the Smart Feed">
+        Smart feed · learning your taste
+      </button>
+      <a class="btn btn-ghost" href="/import.html">Import</a>
+      <button id="uploadBtn" class="btn btn-primary">Upload</button>
+      <button id="settingsBtn" class="btn btn-ghost" title="Settings — profile and visibility">Settings</button>
+    </div>
+  </header>
+
+  <nav class="sources" aria-label="Source filter">
+    <button class="chip chip-active" data-source="all">All sources</button>
+    <button class="chip" data-source="instagram">Instagram</button>
+    <button class="chip" data-source="upload">Uploads</button>
+    <button class="chip chip-disabled" disabled title="Facebook saves are coming soon">
+      Facebook · soon
+    </button>
+  </nav>
+
+  <main id="feed" class="feed" aria-live="polite"></main>
+
+  <section id="emptyState" class="empty hidden">
+    <h1>Your archive is empty.</h1>
+    <p>
+      My Archive holds everything you've saved — Instagram reels and posts,
+      photos and videos from your devices — in one genre-sorted feed.
+    </p>
+    <p>Get started in one of two ways:</p>
+    <ol>
+      <li>
+        <strong>Import your Instagram saves.</strong> In Instagram, go to
+        Settings → Accounts Centre → Your information and permissions →
+        Download your information (JSON format), then import the
+        <code>saved_posts.json</code> file here.
+      </li>
+      <li><strong>Upload a photo or video</strong> from this device.</li>
+    </ol>
+    <div class="empty-actions">
+      <a class="btn btn-primary" href="/import.html">Import Instagram export</a>
+      <button id="emptyUploadBtn" class="btn btn-ghost">Upload something</button>
+    </div>
+    <p class="empty-note">
+      Your data stays on this machine — nothing is uploaded anywhere, and no
+      account is needed. Facebook saves are coming soon.
+    </p>
+  </section>
+
+  <footer class="bottombar">
+    <div id="counter" class="counter">0 / 0</div>
+    <nav id="genreTabs" class="genres" aria-label="Genre filter"></nav>
+  </footer>
+
+  <!-- Upload dialog -->
+  <div id="uploadModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="uploadTitle">
+    <div class="modal-card">
+      <h2 id="uploadTitle">Upload a photo or video</h2>
+      <form id="uploadForm">
+        <label class="field">
+          <span>File</span>
+          <input type="file" name="file" accept="image/*,video/*" required />
+        </label>
+        <label class="field">
+          <span>Caption (optional — used to guess the genre)</span>
+          <input type="text" name="caption" maxlength="500" placeholder="e.g. sunset hike in the Rockies" />
+        </label>
+        <label class="field">
+          <span>Genre</span>
+          <select name="genre">
+            <option value="Auto">Auto — guess from the caption</option>
+            <option>Tech</option>
+            <option>Design</option>
+            <option>Girls</option>
+            <option>Military</option>
+            <option>Cars</option>
+            <option>Animals</option>
+            <option>Flora &amp; Fauna</option>
+            <option>More</option>
+          </select>
+        </label>
+        <p id="uploadError" class="error hidden"></p>
+        <div class="modal-actions">
+          <button type="button" id="uploadCancel" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Settings dialog: profile + visibility -->
+  <div id="settingsModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal-card">
+      <h2 id="settingsTitle">Settings</h2>
+      <form id="settingsForm">
+        <label class="field">
+          <span>Display name (shown on your public page)</span>
+          <input type="text" name="display_name" id="displayNameInput" maxlength="40" />
+        </label>
+        <fieldset class="field visibility-field">
+          <legend>Archive visibility</legend>
+          <label class="radio">
+            <input type="radio" name="visibility" value="private" />
+            <span><strong>Private</strong> — only you can see this archive. Public links return a 404.</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="visibility" value="public" />
+            <span><strong>Public</strong> — anyone with the link can view your archive feed and shared items. No login needed.</span>
+          </label>
+        </fieldset>
+        <div id="publicLinks" class="public-links hidden">
+          <p>Your public archive:</p>
+          <p><a id="publicUrlLink" href="#" target="_blank" rel="noopener"></a></p>
+          <p><a id="profileUrlLink" href="#" target="_blank" rel="noopener"></a></p>
+          <button type="button" id="copyPublicLink" class="btn btn-ghost">Copy public link</button>
+        </div>
+        <p id="settingsError" class="error hidden"></p>
+        <div class="modal-actions">
+          <button type="button" id="settingsCancel" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
