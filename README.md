@@ -114,6 +114,6 @@ Instagram embeds loop **only if Instagram's own player loops them**. There is no
 
 ## Author
 
-Built by **Jay Chaudhary** ([github.com/Jayc0007](https://github.com/Jayc0007)), with Muse.
+Built by **Jay Chaudhary** ([github.com/Jayc0007](https://github.com/Jayc0007)).
 
 MIT License — see [LICENSE](LICENSE).
